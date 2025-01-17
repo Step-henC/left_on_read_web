@@ -1,7 +1,7 @@
 //webhook stripe returns
 
 import Stripe from "stripe"
-import {stripe} from '@/app/lib/stripe/stripe'
+import {stripe} from '@/lib/stripe/stripe'
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {

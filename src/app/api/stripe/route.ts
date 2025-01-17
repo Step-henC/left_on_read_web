@@ -1,6 +1,6 @@
 // /api/stripe
 
-import { stripe } from "@/app/lib/stripe/stripe";
+import { stripe } from "@/lib/stripe/stripe";
 import { NextResponse } from "next/server";
 
 
