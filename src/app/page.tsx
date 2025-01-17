@@ -1,9 +1,9 @@
 "use client"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs"
-import Chat from './components/Chat';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Chat from '../components/Chat';
 import { LogInIcon } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import readLogo from './dark_left_logo.003.jpeg'
 import lightLogo from './left_on_read_logo.001.jpeg'
@@ -36,7 +36,7 @@ export default function Home() {
       <br />
       <br />
      <p className="text-3xl"> Probe AI for book suggestions, or image creation and sound effects from book passages.
-      Start for free and subscribe for continued service.</p>
+      Try for free and subscribe to continue service.</p>
    </div>
    
    <Tabs className="w-[70%] self-center" defaultValue="chat_book" >
