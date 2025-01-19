@@ -1,12 +1,10 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import {toast} from 'react-hot-toast'
-import Image from 'next/image'
-import logo from '../app/left_on_read_logo.001.jpeg'
 
 import { Loader2 } from "lucide-react";
 import { Progress } from "./ui/progress"
@@ -33,7 +31,6 @@ export default function Imagery() {
             })
   
             const body = await res.json()
-            console.log(body)
             setSrc(body.images.data[0].url)
         } catch (e) {
             toast.error(e);

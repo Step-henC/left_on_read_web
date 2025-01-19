@@ -24,7 +24,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     prompt,
     n: 1,
     size: '512x512',
-    
   })
 
   if (!images){
@@ -34,7 +33,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   
   return NextResponse.json({images}, {status: 200})
   } catch (e) {
-    console.log(e)
       return NextResponse.json({error: e}, {status: statusCode})
   } 
 }
