@@ -2,12 +2,9 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Chat from '../components/Chat';
-import { LogInIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import readLogo from './dark_left_logo.003.jpeg'
-import lightLogo from './left_on_read_logo.001.jpeg'
 import Imagery from "@/components/Image";
+
+
 export default function Home() {
 
   const handleOnClick = async () => {
@@ -23,37 +20,28 @@ export default function Home() {
     }
  
   }
-
  
   return (
     <div className="flex flex-col h-screen w-screen">
-
-   <div id='header' className="inset-x-0 top-0 flex h-20 justify-between align-center bg-white" >
-    <Image loading="lazy"  className="ml-10" src={lightLogo} alt="Left on read logo" width={80} height={18}/>
-    <Button className="self-center mr-10"  variant={'outline'}>Login<LogInIcon /></Button>
-   </div>
-   <div className="w-[80%] flex flex-col  h-2/12 m-10 p-2 justify-items-center align-items-center">
-    <h2 className="text-5xl"><strong>Join book lovers around the world engaging in their favorite books </strong></h2>
-      <br />
-      <br />
-     <p className="text-3xl"> Probe AI for book suggestions, or image creation and sound effects from book passages.
-      Try for free and subscribe to continue service.</p>
-   </div>
-   
-   <Tabs className="w-[70%] self-center" defaultValue="chat_book" >
-    <TabsList className="grid grid-cols-3">
-      <TabsTrigger value="chat_book">Chat</TabsTrigger>
-      <TabsTrigger value="imagery">Imagery</TabsTrigger>
-      <TabsTrigger value="audio">Audio</TabsTrigger>
-   </TabsList>
-    <TabsContent value="chat_book">
-      <Chat/>
-  
-    </TabsContent>
-    <TabsContent value="imagery"><Imagery /></TabsContent>
-    <TabsContent value="audio">Check audio here.</TabsContent>
-</Tabs>
-
-</div>
+      <div className="w-[80%] flex flex-col  h-2/12 m-10 p-2 justify-items-center align-items-center">
+        <h2 className="text-5xl"><strong>Join book lovers around the world using AI to engage in their favorite books</strong></h2>
+          <br />
+          <br />
+          <p className="text-3xl"> Probe AI for book suggestions, or image creation and sound effects from book passages.
+                                   Try for free and subscribe to continue service.</p>
+      </div> 
+        <Tabs className="w-[70%] self-center" defaultValue="chat_book" >
+          <TabsList className="grid grid-cols-3">
+            <TabsTrigger value="chat_book">Chat</TabsTrigger>
+            <TabsTrigger value="imagery">Imagery</TabsTrigger>
+            <TabsTrigger value="audio">Audio</TabsTrigger>
+          </TabsList>
+          <TabsContent value="chat_book">
+            <Chat/>
+          </TabsContent>
+          <TabsContent value="imagery"><Imagery /></TabsContent>
+          <TabsContent value="audio">Check audio here.</TabsContent>
+        </Tabs>
+    </div>
   );
 }

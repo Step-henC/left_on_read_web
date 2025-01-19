@@ -70,7 +70,7 @@ export default function Chat() {
         if (coolOff == false) return;
         const interval = setInterval(() => {
             setProgress((prev) => prev + 5);
-            timerRef.current -= 1;
+            timerRef.current--;
 
             if (timerRef.current >= 0) {
             return;
