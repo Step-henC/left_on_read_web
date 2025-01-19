@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import readLogo from './dark_left_logo.003.jpeg'
 import lightLogo from './left_on_read_logo.001.jpeg'
+import Imagery from "@/components/Image";
 export default function Home() {
 
   const handleOnClick = async () => {
@@ -42,13 +43,14 @@ export default function Home() {
    <Tabs className="w-[70%] self-center" defaultValue="chat_book" >
     <TabsList className="grid grid-cols-3">
       <TabsTrigger value="chat_book">Chat</TabsTrigger>
-      <TabsTrigger value="visualize">Visualize</TabsTrigger>
+      <TabsTrigger value="imagery">Imagery</TabsTrigger>
       <TabsTrigger value="audio">Audio</TabsTrigger>
    </TabsList>
     <TabsContent value="chat_book">
       <Chat/>
+  
     </TabsContent>
-    <TabsContent value="visualize">Change your password here.</TabsContent>
+    <TabsContent value="imagery"><Imagery /></TabsContent>
     <TabsContent value="audio">Check audio here.</TabsContent>
 </Tabs>
 
