@@ -1,14 +1,14 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, ButtonHTMLAttributes } from "react"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import {toast} from 'react-hot-toast'
+import {useQuery} from '@tanstack/react-query'
 
 
 import { Loader2 } from "lucide-react";
-import { getAnswer } from "@/app/actions";
 import { Progress } from "./ui/progress"
 
 export default function Chat() {
@@ -27,10 +27,24 @@ export default function Chat() {
         }
         setIsLoading(true)
 
-        getAnswer(value.trim())
-        .then((res) => setGeneratedAnswer(res.text))
-        .catch((e) => {console.log(e); toast.error("Cannot chat with AI at this time. Please try again later")})
-        .finally(() => {setIsLoading(false); setCoolOff(true)})
+       try {
+        const res = await fetch('api/chat/', 
+          {
+            method: 'POST', 
+            body: JSON.stringify({prompt: value.trim()})
+          })
+
+          const text = await res.json()
+
+          setGeneratedAnswer(text.text)
+
+       } catch (e) {
+        toast.error(e)
+       } finally{
+        setIsLoading(false);
+        setCoolOff(true);
+       }
+
       }
     
       useEffect(() => {
@@ -42,6 +56,16 @@ export default function Chat() {
               aiBox.scrollIntoView();
           }
       }, [generatedAnswer])
+
+      const keyPressEnterSubmit = (e: KeyboardEvent) => {
+        if (e.key == 'Enter' ) {
+          const submitBtn = document.getElementById('cht-sbmt');
+          if (submitBtn){
+            submitBtn.click()
+          }
+
+        }
+      }
       
       useEffect(() => {
         if (coolOff == false) return;
@@ -63,7 +87,14 @@ export default function Chat() {
         }
       }, [coolOff])
 
+      useEffect(() => {
 
+        window.addEventListener("keydown", keyPressEnterSubmit);
+
+        return () => {
+          window.removeEventListener('keydown', keyPressEnterSubmit)
+        }
+      }, [])
 
         return (
          <div className="flex flex-row min-h-6/12 justify-center items-center">
@@ -72,7 +103,7 @@ export default function Chat() {
             <Label id='usr-lbl' htmlFor="user-message" >Your message </Label>
             <Textarea minLength={2} id="user-message" onChange={(e) => setValue(e.target.value)} value={value}className="h-[200px]" placeholder="What are some good adventure books..." />
             <p className="place-self-end text-sm text-slate-500">{charCount} characters</p>
-            <Button disabled={isLoading || coolOff || value.trim().length < 2} onClick={askAI}> {isLoading ?  <Loader2 className="animate-spin" /> : coolOff ? "Cooling off" : "Send message"}</Button>
+            <Button id='cht-sbmt' disabled={isLoading || coolOff || value.trim().length < 2} onClick={askAI}> {isLoading ?  <Loader2 className="animate-spin" /> : coolOff ? "Cooling off" : "Send message"}</Button>
             <div className="mt-2 w-full h-[50px]">
             {coolOff && (
               <Progress value={progress}/>
