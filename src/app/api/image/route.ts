@@ -3,10 +3,9 @@ import OpenAI from "openai";
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
-    let statusCode = 400;
+    let statusCode = 200;
 
     try {
-        
 
         const {prompt} = await req.json();
 
@@ -19,19 +18,20 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   
   
-  const images = await openai.images.generate({
-    model: 'dall-e-2',
-    prompt,
-    n: 1,
-    size: '512x512',
-  })
+        const images = await openai.images.generate({
+          model: 'dall-e-2',
+          prompt,
+          n: 1,
+          size: '512x512',
+        })
 
-  if (!images){
-    statusCode = 500;
-    throw new Error('cannot generate images')
-  }
+        if (!images){
+          statusCode = 500;
+          throw new Error('cannot generate images')
+        }
   
-  return NextResponse.json({images}, {status: 200})
+      return NextResponse.json({images}, {status: statusCode});
+
   } catch (e) {
       return NextResponse.json({error: e}, {status: statusCode})
   } 

@@ -12,7 +12,7 @@ export async function POST(req: Request, res: Response) {
         statusCode = 400;
         throw new Error('improper request from client')
     }
-
+    
     const openai = createOpenAI({
         apiKey: process.env.OPENAI_API_KEY!
     })

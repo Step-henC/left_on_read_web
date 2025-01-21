@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Chat from '../components/Chat';
 import Imagery from "@/components/Image";
-
+import Audio from "@/components/Audio";
 
 export default function Home() {
 
@@ -40,7 +40,7 @@ export default function Home() {
             <Chat/>
           </TabsContent>
           <TabsContent value="imagery"><Imagery /></TabsContent>
-          <TabsContent value="audio">Check audio here.</TabsContent>
+          <TabsContent value="audio"><Audio /></TabsContent>
         </Tabs>
     </div>
   );

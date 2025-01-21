@@ -101,7 +101,7 @@ export default function Chat() {
           <div className="grid m-10 gap-2 w-9/12 ">
             <Label id='usr-lbl' htmlFor="user-message" >Your message </Label>
             <Textarea minLength={2} id="user-message" onChange={(e) => setValue(e.target.value)} value={value}className="h-[200px]" placeholder="What are some good adventure books..." />
-            <p className="place-self-end text-sm text-slate-500">{charCount} characters</p>
+            <p className="place-self-end text-sm text-slate-500">{charCount} characters remaining</p>
             <Button id='cht-sbmt' disabled={isLoading || coolOff || value.trim().length < 2} onClick={askAI}> {isLoading ?  <Loader2 className="animate-spin" /> : coolOff ? "Cooling off" : "Send message"}</Button>
             <div className="mt-2 w-full h-[50px]">
             {coolOff && (
