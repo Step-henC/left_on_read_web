@@ -70,19 +70,25 @@ export default function Voiceover() {
         const bookCharacter = bookCharacters.find((person) => person.nativeLocale === bookFormData.accents && person.gender === bookFormData.gender) ?? bookCharacters[0]
         const body: BookCharacter = {...bookCharacter, bookFormData};
 
-
-        const response = await fetch('/api/voiceover', {method: form.method, body: JSON.stringify(body)});
-        const {audioFile} = await response.json();
-        if (!audioFile) {
+        try {
+            const response = await fetch('/api/voiceover', {method: form.method, body: JSON.stringify(body)});
+            const {audioFile} = await response.json();
+            if (!audioFile) {
+                throw new Error('Cannot generate audio at this time. Please try again later')
+            }
+            setAudioSrc(audioFile)
+        } catch(e) {
             toast.error('Cannot generate audio at this time. Please try again later')
-            return;
-        }
-        setAudioSrc(audioFile)
-        setIsLoading(false)
+            console.error(e)
+            return
+        } finally {
+            setIsLoading(false)
 
+        }
     }
 
     useEffect(() => {
+        // if user requests another audio after an existing audio
         if (audioSourceRef.current && audioSrc) {
             audioSourceRef.current.src = audioSrc
             audioSourceRef.current.load()
@@ -120,9 +126,9 @@ export default function Voiceover() {
                 
                 </Select>
                 <Label htmlFor="char_describe"/>
-                <Textarea maxLength={200} minLength={2} value={value} onChange={(e) => setValue(e.target.value)}required name='char_describe' id='char_describe' className="m-4"/>
+                <Textarea maxLength={200} minLength={2} value={value} onChange={(e) => setValue(e.target.value)}required name='char_describe' id='char_describe' className="mt-4 ml-4 mb-0"/>
                 <p className="place-self-end text-sm text-slate-500">{charCount} characters remaining</p>
-                <Button disabled={isLoading || charCount > 198 || charCount <= 0} className="ml-4 mt-2 w-full" type='submit' >{isLoading ? <Loader2 className='animate-spin' /> : "Create Character Voice"}</Button>
+                <Button disabled={isLoading || charCount > 198 || charCount <= 0} className="ml-4 mt-3 w-full" type='submit' >{isLoading ? <Loader2 className='animate-spin' /> : "Create Character Voice"}</Button>
             </form>
 
             <div className="ml-4 mt-3 ">

@@ -4,10 +4,12 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 import Voiceover from "./Voiceover"
+import SoundEffects from "./SoundEffects"
 
+type SoundOptions = "voiceover" | "sound-fx"
 export default function Audio() {
 
-    const [selected, setSelected] = useState('voiceover')
+    const [selected, setSelected] = useState<SoundOptions>('voiceover')
 
     return (
         <div className="flex flex-row items-start justify-start w-full h-full">
@@ -15,7 +17,7 @@ export default function Audio() {
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Button className="max-[900px]:text-xs" onClick={() => setSelected('sound-fx')}>
+                        <Button variant={selected === 'sound-fx' ? "default" : "outline"}className="max-[900px]:text-xs" onClick={() => setSelected('sound-fx')}>
                                 Sound Effects
                         </Button>
                     </TooltipTrigger>
@@ -25,7 +27,7 @@ export default function Audio() {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Button onClick={() => setSelected('voiceover')}>
+                        <Button variant={selected === 'voiceover' ? "default" : "outline"} onClick={() => setSelected('voiceover')}>
                             Voiceover
                         </Button>
                     </TooltipTrigger>
@@ -37,6 +39,7 @@ export default function Audio() {
             </div>
             <div className="flex flex-col w-8/12 justify-center align-center">
             { selected === 'voiceover' && <Voiceover />}
+            { selected === 'sound-fx' && <SoundEffects />}
             </div>     
         </div>
     )
