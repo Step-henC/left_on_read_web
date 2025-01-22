@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { ElevenLabsClient } from "elevenlabs";
-import fs from 'fs'
 
 export async function POST(req: Request, res: Response){
 
@@ -17,7 +15,7 @@ export async function POST(req: Request, res: Response){
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json', 
-                            "xi-api-key": process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY!
+                            "xi-api-key": process.env.ELEVENLABS_API_KEY!
                         },
                         body: JSON.stringify({text: sound_describe, duration_seconds: 5.0})
                     })
@@ -34,7 +32,7 @@ export async function POST(req: Request, res: Response){
                     const buff = await blob.arrayBuffer();
                     const resBuff = Buffer.from(buff)
 
-                    
+
                     return new Response(resBuff, {headers})
       
 
