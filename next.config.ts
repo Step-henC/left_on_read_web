@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
+        hostname: 'oaidalleapiprodscus.blob.core.windows.net', //url from OpenAI image generation
         port: '',
         pathname: '/private/**',
         search: ''

@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Chat from '../components/Chat';
 import Imagery from "@/components/Image";
 import Audio from "@/components/Audio";
+import Video from "@/components/Video";
 
 export default function Home() {
 
@@ -31,16 +32,19 @@ export default function Home() {
                                    Try for free and subscribe to continue service.</p>
       </div> 
         <Tabs className="w-[70%] self-center" defaultValue="chat_book" >
-          <TabsList className="grid grid-cols-3">
+          <TabsList className="grid grid-cols-4">
             <TabsTrigger value="chat_book">Chat</TabsTrigger>
             <TabsTrigger value="imagery">Imagery</TabsTrigger>
             <TabsTrigger value="audio">Audio</TabsTrigger>
+            <TabsTrigger value="video">Video</TabsTrigger>
+
           </TabsList>
           <TabsContent value="chat_book">
             <Chat/>
           </TabsContent>
           <TabsContent value="imagery"><Imagery /></TabsContent>
           <TabsContent value="audio"><Audio /></TabsContent>
+          <TabsContent value="video"><Video /></TabsContent>
         </Tabs>
     </div>
   );

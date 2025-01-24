@@ -3,8 +3,7 @@
 import Image from 'next/image'
 import { Button } from "@/components/ui/button";
 import { LogInIcon } from "lucide-react";
-import lightLogo from '../app/left_on_read_logo.001.jpeg'
-import Link from 'next/link';
+import lightLogo from '../../public/left_on_read_logo.001.jpeg'
 import HeaderDropdown from './HeaderDropdown';
 
 
